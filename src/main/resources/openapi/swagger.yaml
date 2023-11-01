@@ -1,0 +1,61 @@
+openapi: "3.0.3"
+info:
+  title: "ktor_library_app API"
+  description: "ktor_library_app API"
+  version: "1.0.0"
+servers:
+  - url: "http://0.0.0.0:8080"
+paths:
+  /info:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+              examples:
+                Example#1:
+                  value: "authentication...!!"
+  /login:
+    post:
+      description: ""
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/LoginResponse"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    LoginRequest:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        password:
+          type: "string"
+    LoginResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        token:
+          type: "string"
